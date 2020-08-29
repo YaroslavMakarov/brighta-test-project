@@ -253,7 +253,9 @@ export default {
     },
 
     handleCellClick: function (date) {
-        if (this.filterDatesArr.length === 0) {
+        if (this.filterDatesArr.length === 0
+            && date <= this.currentDate
+        ) {
             this.filterDatesArr.push(date);
             this.arrayDays = this.arrayDays.map(week =>
                 week.map(day =>
@@ -264,6 +266,7 @@ export default {
         } else if (this.filterDatesArr.length === 1) {
             if (this.filterDatesArr[0] < date
                 && this.filterDatesArr[0] !== date
+                && date <= this.currentDate
             ) {
                 this.filterDatesArr.unshift(date);
                 this.buttonBarFilter = "ручная фильтрация";
@@ -271,12 +274,15 @@ export default {
             } else if (
                 this.filterDatesArr[0] > date
                 && this.filterDatesArr[0] !== date
+                && date <= this.currentDate
             ) {
                 this.filterDatesArr.push(date);
                 this.buttonBarFilter = "ручная фильтрация";
                 this.filteringWithButtonBar();
             }
-        } else if (this.filterDatesArr.length >= 2) {
+        } else if (this.filterDatesArr.length >= 2
+            && date <= this.currentDate
+        ) {
             this.clearFilteringParams();
             this.filterDatesArr.push(date);
             this.arrayDays = this.arrayDays.map(week =>
