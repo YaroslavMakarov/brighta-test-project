@@ -52,5 +52,11 @@ export const singleFiltration = (day, date) => {
         }
     }
 
-    return day;
+    return {
+        ...day,
+        filteringDate: false,
+        firstFilterDate: false,
+        lastFilterDate: false,
+        singleFilterDate: false,
+    };
 };

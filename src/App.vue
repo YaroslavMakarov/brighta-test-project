@@ -55,6 +55,7 @@ export default {
     }
   },
   methods: {
+
     fillArrayDays: function () {
       let arr = [];
       let fullArr = [];
@@ -86,6 +87,7 @@ export default {
       }
       this.arrayDays = [...fullArr];
     },
+
     prevMonthClick: function () {
         if (this.month === 0) {
             this.year = this.year - 1;
@@ -102,6 +104,7 @@ export default {
             this.filteringWithButtonBar();
         }
     },
+
     nextMonthClick: function () {
         if (this.month === 11) {
             this.year = this.year + 1;
@@ -118,6 +121,7 @@ export default {
             this.filteringWithButtonBar();
         }
     },
+
     clearFilteringParams: function () {
         this.buttonBarFilter = null;
         this.filterDatesArr = [];
@@ -133,6 +137,7 @@ export default {
             ))
         ))
     },
+
     filteringWithButtonBar: function () {
         switch(this.buttonBarFilter) {
             case "весь период":
@@ -221,6 +226,7 @@ export default {
             default: return this.arrayDays;
         }
     },
+
     setButtonBarFilter: function (filter) {
         this.clearFilteringParams();
         this.buttonBarFilter = filter;
@@ -245,6 +251,7 @@ export default {
         }
         this.filteringWithButtonBar();
     },
+
     handleCellClick: function (date) {
         if (this.filterDatesArr.length === 0) {
             this.filterDatesArr.push(date);
@@ -252,13 +259,19 @@ export default {
                 week.map(day =>
                     singleFiltration(day, date)
                 )
-            )
+            );
+            this.buttonBarFilter = null;
         } else if (this.filterDatesArr.length === 1) {
-            if (this.filterDatesArr[0] < date) {
+            if (this.filterDatesArr[0] < date
+                && this.filterDatesArr[0] !== date
+            ) {
                 this.filterDatesArr.unshift(date);
                 this.buttonBarFilter = "ручная фильтрация";
                 this.filteringWithButtonBar();
-            } else {
+            } else if (
+                this.filterDatesArr[0] > date
+                && this.filterDatesArr[0] !== date
+            ) {
                 this.filterDatesArr.push(date);
                 this.buttonBarFilter = "ручная фильтрация";
                 this.filteringWithButtonBar();
@@ -270,7 +283,8 @@ export default {
                 week.map(day =>
                     singleFiltration(day, date)
                 )
-            )
+            );
+            this.buttonBarFilter = null;
         }
     }
   },
