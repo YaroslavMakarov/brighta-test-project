@@ -1,4 +1,5 @@
 [DEMO](https://yaroslavmakarov.github.io/brighta-test-project/)
+___
 Description:
 This calendar acts as a filter for applications that add files every day. And thanks to this filter, you can filter files at a certain interval.
 To the left of the calendar is a set of standard filters. You can also manually select two dates between which you want to filter files.
